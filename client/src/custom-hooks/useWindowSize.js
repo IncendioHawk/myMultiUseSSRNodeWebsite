@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useEventListener from "../13-useEventListener/useEventListener"
+import useEventListener from './useEventListener'
 
 export default function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
