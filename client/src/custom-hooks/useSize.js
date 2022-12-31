@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useEffect } from 'react/cjs/react.development'
+import { useState } from "react"
+import { useEffect } from "react/cjs/react.development"
 
 export default function useSize(ref) {
   const [size, setSize] = useState({})
@@ -10,3 +10,4 @@ export default function useSize(ref) {
     observer.observe(ref.current)
     return () => observer.disconnect()
   }, [])
+}

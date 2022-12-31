@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react'
+import { useCallback, useState, useEffect } from "react"
 
 export function useLocalStorage(key, defaultValue) {
   return useStorage(key, defaultValue, window.localStorage)

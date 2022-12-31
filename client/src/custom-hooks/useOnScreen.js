@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
 
 export default function useOnScreen(ref, rootMargin = "0px") {
   const [isVisible, setIsVisible] = useState(false)

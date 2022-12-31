@@ -1,4 +1,4 @@
-import useAsync from './useAsync'
+import useAsync from "./useAsync"
 
 export default function useScript(url) {
   return useAsync(() => {
