@@ -11,10 +11,14 @@ app.get("/", checkLoggedIn, (req, res) => {
   res.render("index", {})
 })
 
+app.get("/login", (req, res) => {
+  res.render("login")
+})
+
 app.listen(5000, () => console.log("Server listening on port 5000"))
 
 function checkLoggedIn(req, res, next) {
-  req.isAuthenticated = () => true
+  req.isAuthenticated = () => true // write auth function
   if (req.isAuthenticated()) {
     next()
   } else {
