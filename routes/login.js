@@ -9,7 +9,6 @@ const Session = require("../models/sessionSchema")
 const crypto = require("crypto")
 
 router.get("/", checkNotLoggedIn, async (req, res) => {
-  console.log(await Session.findOneAndDelete())
   res.render("login", { error: false })
 })
 
@@ -49,7 +48,9 @@ async function authenticateUser(req, res, next) {
 
 async function checkNotLoggedIn(req, res, next) {
   if (await databaseEmpty(Session)) next()
-  const user = await Session.findOne({ sessionId: req.cookies?.sessionId })
+  const session = await Session.findOne({ sessionId: req.cookies?._session_ID })
+  const user = await User.findById(session.user)
+  console.log(user)
   if (user != null) res.redirect("/", { username: user.userName })
   next()
 }

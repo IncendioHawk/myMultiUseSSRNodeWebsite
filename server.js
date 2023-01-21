@@ -1,5 +1,8 @@
 const express = require("express")
 const app = express()
+const mongoose = require("mongoose")
+mongoose.set("strictQuery", false)
+mongoose.connect("mongodb://127.0.0.1/mywebsite")
 const signupRouter = require("./routes/signup")
 const loginRouter = require("./routes/login")
 const Session = require("./models/sessionSchema")
@@ -16,9 +19,14 @@ app.use("/login", loginRouter)
 app.get("/", checkLoggedIn, async (req, res) => {
   const { _session_ID: sessionId } = req.cookies
   const session = await Session.findOne({ sessionId })
+  if (session == null) return
   const user = await User.findById(session.user)
   const username = user?.userName
   res.render("index", { username: username })
+})
+
+app.post("/logout", async (req, res) => {
+  await Session.findByIdAndDelete(req.cookies?._session_ID)
 })
 
 function checkLoggedIn(req, res, next) {
