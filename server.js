@@ -25,20 +25,27 @@ app.get("/", checkLoggedIn, async (req, res) => {
   res.render("index", { username: username })
 })
 
-app.post("/logout", async (req, res) => {
-  await Session.findByIdAndDelete(req.cookies?._session_ID)
+app.post("/logout", checkLoggedIn, async (req, res) => {
+  console.log(await User.find())
+  try {
+    await Session.findOneAndDelete({ sessionId: req.cookies?._session_ID })
+    res.clearCookie("_session_ID")
+    res.render("logout-success")
+  } catch {
+    res.status(500).redirect("/")
+  }
 })
 
-function checkLoggedIn(req, res, next) {
+async function checkLoggedIn(req, res, next) {
   req.isAuthenticated = async () => {
-    const { _session_ID: sessionId } = req.cookies
+    const sessionId = req.cookies._session_ID
     const session = await Session.findOne({ sessionId })
     return sessionId != null || session != null
-  } // write auth function
-  if (req.isAuthenticated()) {
+  }
+  if (await req.isAuthenticated()) {
     next()
   } else {
-    res.redirect("/login")
+    res.status(401).redirect("/login")
   }
 }
 
