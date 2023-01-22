@@ -1,7 +1,6 @@
 require("dotenv").config()
 const express = require("express")
 const router = express.Router()
-const cors = require("cors")
 const bcrypt = require("bcrypt")
 const mongoose = require("mongoose")
 mongoose.set("strictQuery", false)
@@ -10,13 +9,11 @@ const User = require("../models/userSchema")
 const validator = require("email-validator")
 const passwordValidator = require("../password-validator")
 
-router.use(cors({ origin: process.env.site_url, credentials: true }))
-
-router.get("/", (req, res) => {
+router.get("/", checkNotLoggedIn, (req, res) => {
   res.render("signup", { error: false })
 })
 
-router.post("/", validateInput, async (req, res) => {
+router.post("/", checkNotLoggedIn, validateInput, async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10)
   await User.create({
     userName: req.body.username,
@@ -70,6 +67,16 @@ async function validateInput(req, res, next) {
     vars.error = true
   }
   invalid ? res.render("signup", vars) : next()
+}
+
+async function checkNotLoggedIn(req, res, next) {
+  if ((await databaseEmpty(Session)) || (await databaseEmpty(User)))
+    return next()
+  const session = await Session.findOne({ sessionId: req.cookies?._session_ID })
+  if (session == null) return next()
+  const user = await User.findById(session.user)
+  if (user != null) return res.redirect("/" /*, { username: user.userName }*/)
+  next()
 }
 
 async function databaseEmpty() {

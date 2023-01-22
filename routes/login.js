@@ -1,5 +1,4 @@
 require("dotenv").config()
-const cors = require("cors")
 const express = require("express")
 const router = express.Router()
 const mongoose = require("mongoose")
@@ -9,8 +8,6 @@ const bcrypt = require("bcrypt")
 const User = require("../models/userSchema")
 const Session = require("../models/sessionSchema")
 const crypto = require("crypto")
-
-router.use(cors({ origin: process.env.site_url, credentials: true }))
 
 router.get("/", checkNotLoggedIn, async (req, res) => {
   res.render("login", { error: false })
@@ -25,7 +22,7 @@ router.post("/", checkNotLoggedIn, authenticateUser, async (req, res) => {
     .cookie("_session_ID", sessionId, {
       secure: true,
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "strict",
     })
     .redirect("/")
 })
