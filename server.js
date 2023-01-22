@@ -1,14 +1,17 @@
+require("dotenv").config()
 const express = require("express")
 const app = express()
+const cors = require("cors")
 const mongoose = require("mongoose")
 mongoose.set("strictQuery", false)
-mongoose.connect("mongodb://127.0.0.1/mywebsite")
+mongoose.connect(process.env.database_url)
 const signupRouter = require("./routes/signup")
 const loginRouter = require("./routes/login")
 const Session = require("./models/sessionSchema")
 const User = require("./models/userSchema")
 const cookieParser = require("cookie-parser")
 
+app.use(cors({ origin: process.env.site_url, credentials: true }))
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.set("view engine", "ejs")
@@ -26,13 +29,12 @@ app.get("/", checkLoggedIn, async (req, res) => {
 })
 
 app.post("/logout", checkLoggedIn, async (req, res) => {
-  console.log(await User.find())
   try {
     await Session.findOneAndDelete({ sessionId: req.cookies?._session_ID })
     res.clearCookie("_session_ID")
     res.render("logout-success")
   } catch {
-    res.status(500).redirect("/")
+    res.redirect("/")
   }
 })
 
@@ -45,8 +47,10 @@ async function checkLoggedIn(req, res, next) {
   if (await req.isAuthenticated()) {
     next()
   } else {
-    res.status(401).redirect("/login")
+    res.redirect("/login")
   }
 }
 
-app.listen(5000, () => console.log("Server listening on port 5000"))
+app.listen(process.env.PORT || 5000, () =>
+  console.log(`Server listening on port ${process.env.PORT || 5000}`)
+)

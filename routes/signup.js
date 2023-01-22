@@ -1,12 +1,16 @@
+require("dotenv").config()
 const express = require("express")
 const router = express.Router()
+const cors = require("cors")
 const bcrypt = require("bcrypt")
 const mongoose = require("mongoose")
 mongoose.set("strictQuery", false)
-mongoose.connect("mongodb://127.0.0.1/mywebsite")
+mongoose.connect(process.env.database_url)
 const User = require("../models/userSchema")
 const validator = require("email-validator")
 const passwordValidator = require("../password-validator")
+
+router.use(cors({ origin: process.env.site_url, credentials: true }))
 
 router.get("/", (req, res) => {
   res.render("signup", { error: false })
