@@ -19,7 +19,11 @@
           placeholder="Username"
           required
           value="<%= locals.username %>"
-          autocapitalize="none" />
+          autocapitalize="none"
+          <% if (locals.focus_user) {%>
+            autofocus
+          <% } %>
+           />
         <% if (locals.error && locals.usernameMessage != null) {%>
         <div class="error-email"><%= locals.usernameMessage %></div>
         <% } %>
@@ -32,7 +36,11 @@
           id="password"
           placeholder="Password"
           required
-          autocapitalize="none" />
+          autocapitalize="none"
+          <% if (locals.focus_password) {%>
+            autofocus
+          <% } %>
+          />
         <% if (locals.error && locals.passwordMessage != null) {%>
         <div class="error-email"><%= locals.passwordMessage %></div>
         <% } %>

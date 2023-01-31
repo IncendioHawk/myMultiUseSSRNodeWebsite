@@ -32,13 +32,15 @@ async function authenticateUser(req, res, next) {
   if (user == null) {
     return res.render("login", {
       username: req.body.username,
-      usernameMessage: "User does not exist",
+      focus_user: true,
+      usernameMessage: `User '${req.body.username}' does not exist`,
       error: true,
     })
   }
   if (!(await bcrypt.compare(req.body.password, user.password))) {
     return res.render("login", {
       username: req.body.username,
+      focus_password: true,
       passwordMessage: "Password is incorrect",
       error: true,
     })
@@ -52,7 +54,7 @@ async function checkNotLoggedIn(req, res, next) {
   const session = await Session.findOne({ sessionId: req.cookies?._session_ID })
   if (session == null) return next()
   const user = await User.findById(session.user)
-  if (user != null) return res.redirect("/" /*, { username: user.userName }*/)
+  if (user != null) return res.redirect("/")
   next()
 }
 
