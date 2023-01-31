@@ -19,11 +19,7 @@
           placeholder="Username"
           required
           value="<%= locals.username %>"
-          autocapitalize="none"
-          <% if (locals.focus_user) {%>
-            autofocus
-          <% } %>
-           />
+          autocapitalize="none" />
         <% if (locals.error && locals.usernameMessage != null) {%>
         <div class="error-email"><%= locals.usernameMessage %></div>
         <% } %>
@@ -36,16 +32,16 @@
           id="password"
           placeholder="Password"
           required
-          autocapitalize="none"
-          <% if (locals.focus_password) {%>
-            autofocus
-          <% } %>
-          />
+          autocapitalize="none" />
         <% if (locals.error && locals.passwordMessage != null) {%>
         <div class="error-email"><%= locals.passwordMessage %></div>
         <% } %>
       </div>
       <input class="submit-btn" type="submit" />
+      <div class="signup-link-container">
+        <p>Don't have an account yet?</p>
+        <a class="signup-link" href="/signup">Signup</a>
+      </div>
     </form>
   </body>
 </html>

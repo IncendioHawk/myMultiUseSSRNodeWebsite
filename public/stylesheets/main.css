@@ -1,2 +1,6 @@
 @import "shared/variables.css";
 @import "shared/header.css";
+
+body {
+  background-color: hsl(var(--color-base-hue), 50%, 30%);
+}

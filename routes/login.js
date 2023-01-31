@@ -32,7 +32,6 @@ async function authenticateUser(req, res, next) {
   if (user == null) {
     return res.render("login", {
       username: req.body.username,
-      focus_user: true,
       usernameMessage: `User '${req.body.username}' does not exist`,
       error: true,
     })
@@ -40,7 +39,6 @@ async function authenticateUser(req, res, next) {
   if (!(await bcrypt.compare(req.body.password, user.password))) {
     return res.render("login", {
       username: req.body.username,
-      focus_password: true,
       passwordMessage: "Password is incorrect",
       error: true,
     })

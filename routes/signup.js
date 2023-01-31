@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 mongoose.set("strictQuery", false)
 mongoose.connect(process.env.database_url)
 const User = require("../models/userSchema")
+const Session = require("../models/sessionSchema")
 const validator = require("email-validator")
 const passwordValidator = require("../password-validator")
 
