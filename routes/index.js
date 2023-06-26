@@ -4,8 +4,9 @@ const router = express.Router()
 const mongoose = require("mongoose")
 mongoose.set("strictQuery", false)
 mongoose.connect(process.env.DATABASE_URL)
-const Session = require("./models/sessionSchema")
-const User = require("./models/userSchema")
+const Session = require("../models/sessionSchema")
+const User = require("../models/userSchema")
+const databaseEmpty = require("../databaseEmpty")
 
 router.get("/", checkLoggedIn, async (req, res) => {
   const { _session_ID: sessionId } = req.cookies
@@ -28,6 +29,7 @@ router.post("/logout", checkLoggedIn, async (req, res) => {
 
 async function checkLoggedIn(req, res, next) {
   req.isAuthenticated = async () => {
+    if (await databaseEmpty(Session)) return false
     const sessionId = req.cookies._session_ID
     const session = await Session.findOne({ sessionId })
     return sessionId != null || session != null
@@ -38,3 +40,5 @@ async function checkLoggedIn(req, res, next) {
     res.redirect("/login")
   }
 }
+
+module.exports = router

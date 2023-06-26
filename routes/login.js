@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt")
 const User = require("../models/userSchema")
 const Session = require("../models/sessionSchema")
 const crypto = require("crypto")
+const databaseEmpty = require("../databaseEmpty")
 
 router.get("/", checkNotLoggedIn, async (req, res) => {
   res.render("login", { error: false })
@@ -54,11 +55,6 @@ async function checkNotLoggedIn(req, res, next) {
   const user = await User.findById(session.user)
   if (user != null) return res.redirect("/")
   next()
-}
-
-async function databaseEmpty(schema) {
-  const length = await schema.countDocuments()
-  return length === 0
 }
 
 module.exports = router

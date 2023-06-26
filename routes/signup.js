@@ -9,6 +9,7 @@ const User = require("../models/userSchema")
 const Session = require("../models/sessionSchema")
 const validator = require("email-validator")
 const passwordValidator = require("../password-validator")
+const databaseEmpty = require("../databaseEmpty")
 
 router.get("/", checkNotLoggedIn, (req, res) => {
   res.render("signup", { error: false })
@@ -78,11 +79,6 @@ async function checkNotLoggedIn(req, res, next) {
   const user = await User.findById(session.user)
   if (user != null) return res.redirect("/" /*, { username: user.userName }*/)
   next()
-}
-
-async function databaseEmpty() {
-  const length = await User.countDocuments()
-  return length === 0
 }
 
 module.exports = router
