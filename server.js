@@ -1,7 +1,6 @@
 require("dotenv").config()
 const express = require("express")
 const app = express()
-const expressLayouts = require("express-ejs-layouts")
 const signupRouter = require("./routes/signup")
 const loginRouter = require("./routes/login")
 const indexRouter = require("./routes/index")
@@ -10,6 +9,7 @@ const Session = require("./models/sessionSchema")
 
 const sessionTimeoutTime = 300000
 
+app.use(express.static(__dirname + "/public"))
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.set("view engine", "ejs")

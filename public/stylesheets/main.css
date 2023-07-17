@@ -2,5 +2,6 @@
 @import "shared/header.css";
 
 body {
+  margin: 0;
   background-color: hsl(var(--color-base-hue), 50%, 30%);
 }

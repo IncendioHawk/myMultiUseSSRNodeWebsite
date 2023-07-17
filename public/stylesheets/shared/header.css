@@ -1,0 +1,15 @@
+.navbar {
+  background-color: hsl(var(--color-base-hue), 50%, 20%);
+  height: 4rem;
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  margin-left: 2rem;
+  padding-block: 0.75rem;
+  padding-inline: 1rem;
+  border-radius: 5rem;
+  border: none;
+  cursor: pointer;
+}
