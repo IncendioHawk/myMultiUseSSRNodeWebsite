@@ -1,7 +1,20 @@
 @import "shared/variables.css";
 @import "shared/header.css";
 
+:root {
+  font-family: monospace;
+  height: 100%;
+}
+
 body {
   margin: 0;
-  background-color: hsl(var(--color-base-hue), 50%, 30%);
+  background: radial-gradient(
+    hsl(var(--color-base-hue), 50%, 30%),
+    hsl(calc(var(--color-base-hue) + 100), 50%, 30%)
+  );
+  font-size: 2rem;
+}
+
+.welcome-message {
+  margin-left: 2rem;
 }
