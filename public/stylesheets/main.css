@@ -1,6 +1,12 @@
 @import "shared/variables.css";
 @import "shared/header.css";
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: monospace;
   height: 100%;
@@ -8,7 +14,8 @@
 
 body {
   margin: 0;
-  background: radial-gradient(
+  background: linear-gradient(
+    to right,
     hsl(var(--color-base-hue), 50%, 30%),
     hsl(calc(var(--color-base-hue) + 100), 50%, 30%)
   );
@@ -17,4 +24,43 @@ body {
 
 .welcome-message {
   margin-left: 2rem;
+}
+
+.logout-success-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.logout-success-message + a {
+  text-decoration: none;
+  border: 2.5px solid black;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: rgb(240, 240, 240);
+  transition: scale 100ms ease-in-out;
+  outline: transparent;
+}
+
+.logout-success-message + a:hover {
+  scale: 1.1;
+}
+
+.logout-success-message + a:focus-visible {
+  border-color: hotpink;
+}
+
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+label {
+  /* display: none; */
 }
