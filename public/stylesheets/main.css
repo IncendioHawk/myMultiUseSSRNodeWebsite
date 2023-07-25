@@ -53,14 +53,66 @@ body {
   border-color: hotpink;
 }
 
-.login-form-container {
+.login-form-container,
+.login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+}
+
+.login-form-container {
   min-height: 100vh;
 }
 
+.user-input {
+  position: relative;
+}
+
 label {
-  /* display: none; */
+  /* color: transparent; */
+  display: none;
+}
+
+.user-input:has(> input:focus) > label {
+  /* color: black; */
+  display: inline;
+}
+
+.login-form input {
+  height: 3rem;
+  padding-inline: 1rem;
+  margin: 0.3rem;
+  border: 1px solid #c8ccdf;
+  border-radius: 4px;
+  width: 25rem;
+}
+
+.login-form .submit-btn {
+  border-color: transparent;
+  margin-top: 2rem;
+  background-color: #3b93f7;
+  transition: translate 100ms ease;
+  &:hover,
+  &:focus-visible {
+    outline: transparent;
+    background-color: #0a78f5;
+    translate: 0 -0.3rem;
+  }
+}
+
+.signup-link {
+  color: hsl(calc(var(--color-base-hue) - 100), 50%, 85%);
+  text-decoration: none;
+  border: 1px solid hsl(calc(var(--color-base-hue) - 100), 50%, 85%);
+  border-radius: 1.5rem;
+  padding: 0.7rem 1rem;
+  transition: background-color 400ms ease-in-out, border 400ms step-end;
+  &:hover,
+  &:focus-visible {
+    outline: transparent;
+    background-color: blue;
+    border: none;
+  }
 }
