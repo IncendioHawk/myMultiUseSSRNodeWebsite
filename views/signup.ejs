@@ -13,10 +13,10 @@
       <div class="email-wrapper user-input">
         <label for="email">Email address</label>
         <input
+          placeholder
           type="email"
           name="email"
           id="email"
-          placeholder="Email address"
           required
           value="<%= locals.email %>"
           autocapitalize="none" />
@@ -27,10 +27,11 @@
       <div class="username-wrapper user-input">
         <label for="username">Username</label>
         <input
+          placeholder
           type="text"
           name="username"
           id="username"
-          placeholder="Username"
+          ="Username"
           required
           value="<%= locals.username %>"
           autocapitalize="none" />
@@ -41,10 +42,10 @@
       <div class="password-wrapper user-input">
         <label for="password">Password</label>
         <input
+          placeholder
           type="password"
           name="password"
           id="password"
-          placeholder="Password"
           required
           autocapitalize="none" />
         <% if (locals.error && locals.passwordMessage != null) {%>
@@ -52,10 +53,10 @@
         <% } %>
         <label for="confirm-password">Confirm password</label>
         <input
+          placeholder
           type="password"
           name="confirmPassword"
           id="confirmPassword"
-          placeholder="Confirm password"
           required
           autocapitalize="none" />
         <% if (locals.error && locals.passwordConfirmMessage != null) {%>

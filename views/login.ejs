@@ -14,28 +14,28 @@
         <div class="username-wrapper user-input">
           <label for="username">Username</label>
           <input
+            placeholder
             type="text"
             name="username"
             id="username"
-            placeholder="Username"
             required
             value="<%= locals.username %>"
             autocapitalize="none" />
           <% if (locals.error && locals.usernameMessage != null) {%>
-          <div class="error-email"><%= locals.usernameMessage %></div>
+          <div class="error error-email"><%= locals.usernameMessage %></div>
           <% } %>
         </div>
         <div class="password-wrapper user-input">
           <label for="password">Password</label>
           <input
+            placeholder
             type="password"
             name="password"
             id="password"
-            placeholder="Password"
             required
             autocapitalize="none" />
           <% if (locals.error && locals.passwordMessage != null) {%>
-          <div class="error-email"><%= locals.passwordMessage %></div>
+          <div class="error error-password"><%= locals.passwordMessage %></div>
           <% } %>
         </div>
         <input class="submit-btn" type="submit" />

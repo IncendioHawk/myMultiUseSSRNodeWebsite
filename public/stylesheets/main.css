@@ -70,23 +70,68 @@ body {
   position: relative;
 }
 
-label {
-  /* color: transparent; */
-  display: none;
+.user-input input {
+  color: hsl(calc(var(--color-base-hue)), 10%, 70%);
 }
 
-.user-input:has(> input:focus) > label {
-  /* color: black; */
-  display: inline;
+label {
+  position: absolute;
+  color: hsl(calc(var(--color-base-hue)), 10%, 70%);
+  font-size: 1.2rem;
+  top: 0.85rem;
+  left: 0.7rem;
+  transition: top 200ms ease 0s, left 200ms ease 0s;
+}
+
+.user-input:has(input:not(:placeholder-shown)) label {
+  top: -1.3rem;
+  left: 0;
+}
+
+.user-input:has(> input:focus) {
+  & input {
+    outline: none;
+    border: 2px solid #3b93f7;
+  }
+
+  & label {
+    top: -1.3rem;
+    left: 0;
+
+    &::after {
+      content: ":";
+    }
+  }
 }
 
 .login-form input {
   height: 3rem;
   padding-inline: 1rem;
-  margin: 0.3rem;
+  margin-bottom: 1.5rem;
   border: 1px solid #c8ccdf;
   border-radius: 4px;
   width: 25rem;
+}
+
+.user-input:has(.error) label,
+.user-input:has(.error) input:not([type="submit"]),
+.error {
+  color: red;
+}
+
+.error {
+  position: absolute;
+  left: 26rem;
+  font-size: 1rem;
+  width: max-content;
+}
+
+.error-email {
+  top: 1rem;
+}
+
+.error-password {
+  top: 1rem;
 }
 
 .login-form .submit-btn {
