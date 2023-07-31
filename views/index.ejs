@@ -11,5 +11,30 @@
   <body>
     <%- include('_nav-bar') %>
     <h1 class="welcome-message">Welcome back <%= locals.username %></h1>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let interactedWithPageWithin30Seconds = false
+        document.addEventListener("click", interactedWithPage)
+        document.addEventListener("keydown", interactedWithPage)
+
+        setInterval(() => {
+          if (interactedWithPageWithin30Seconds) {
+            interactedWithPageWithin30Seconds = false
+            fetch("http://localhost:5000/interactedWithPage?boolean=true", {
+              credentials: "include",
+            })
+          } else {
+            fetch("http://localhost:5000/interactedWithPage?boolean=false", {
+              credentials: "include",
+            })
+          }
+        }, 10000)
+
+        function interactedWithPage() {
+          interactedWithPageWithin30Seconds = true
+        }
+      })
+    </script>
   </body>
 </html>

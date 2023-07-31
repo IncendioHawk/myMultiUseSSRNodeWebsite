@@ -9,65 +9,69 @@
   </head>
 
   <body>
-    <form method="post" action="/signup">
-      <div class="email-wrapper user-input">
-        <label for="email">Email address</label>
-        <input
-          placeholder
-          type="email"
-          name="email"
-          id="email"
-          required
-          value="<%= locals.email %>"
-          autocapitalize="none" />
-        <% if (locals.error && locals.emailMessage != null) {%>
-        <div class="error-email"><%= locals.emailMessage %></div>
-        <% } %>
-      </div>
-      <div class="username-wrapper user-input">
-        <label for="username">Username</label>
-        <input
-          placeholder
-          type="text"
-          name="username"
-          id="username"
-          ="Username"
-          required
-          value="<%= locals.username %>"
-          autocapitalize="none" />
-        <% if (locals.error && locals.usernameMessage != null) {%>
-        <div class="error-email"><%= locals.usernameMessage %></div>
-        <% } %>
-      </div>
-      <div class="password-wrapper user-input">
-        <label for="password">Password</label>
-        <input
-          placeholder
-          type="password"
-          name="password"
-          id="password"
-          required
-          autocapitalize="none" />
-        <% if (locals.error && locals.passwordMessage != null) {%>
-        <div class="error-email"><%= locals.passwordMessage %></div>
-        <% } %>
-        <label for="confirm-password">Confirm password</label>
-        <input
-          placeholder
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          required
-          autocapitalize="none" />
-        <% if (locals.error && locals.passwordConfirmMessage != null) {%>
-        <div class="error-email"><%= locals.passwordConfirmMessage %></div>
-        <% } %>
-      </div>
-      <input class="submit-btn" type="submit" />
-      <div class="login-link-container">
-        <p>Already have an account?</p>
-        <a class="login-link" href="/login">Login</a>
-      </div>
-    </form>
+    <div class="signup-form-container">
+      <form class="signup-form" method="post" action="/signup">
+        <div class="email-wrapper user-input">
+          <label for="email">Email address</label>
+          <input
+            placeholder
+            type="email"
+            name="email"
+            id="email"
+            required
+            value="<%= locals.email %>"
+            autocapitalize="none" />
+          <% if (locals.error && locals.emailMessage != null) {%>
+          <div class="error-email"><%= locals.emailMessage %></div>
+          <% } %>
+        </div>
+        <div class="username-wrapper user-input">
+          <label for="username">Username</label>
+          <input
+            placeholder
+            type="text"
+            name="username"
+            id="username"
+            ="Username"
+            required
+            value="<%= locals.username %>"
+            autocapitalize="none" />
+          <% if (locals.error && locals.usernameMessage != null) {%>
+          <div class="error-email"><%= locals.usernameMessage %></div>
+          <% } %>
+        </div>
+        <div class="password-wrapper user-input">
+          <label for="password">Password</label>
+          <input
+            placeholder
+            type="password"
+            name="password"
+            id="password"
+            required
+            autocapitalize="none" />
+          <% if (locals.error && locals.passwordMessage != null) {%>
+          <div class="error-email"><%= locals.passwordMessage %></div>
+          <% } %>
+        </div>
+        <div class="confirm-password-wrapper user-input">
+          <label for="confirm-password">Confirm password</label>
+          <input
+            placeholder
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            required
+            autocapitalize="none" />
+          <% if (locals.error && locals.passwordConfirmMessage != null) {%>
+          <div class="error-email"><%= locals.passwordConfirmMessage %></div>
+          <% } %>
+        </div>
+        <input class="submit-btn" type="submit" />
+        <div class="login-link-container">
+          <p>Already have an account?</p>
+          <a class="login-link" href="/login">Login</a>
+        </div>
+      </form>
+    </div>
   </body>
 </html>
