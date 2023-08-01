@@ -13,23 +13,63 @@
     <h1 class="welcome-message">Welcome back <%= locals.username %></h1>
 
     <script>
+      const messageStyle = `
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .message + a {
+        text-decoration: none;
+        border: 2.5px solid black;
+        border-radius: 2rem;
+        padding: 0.5rem 1rem;
+        background-color: rgb(240, 240, 240);
+        transition: scale 100ms ease-in-out;
+        outline: transparent;
+      }
+
+      .message + a:hover {
+        scale: 1.1;
+      }
+
+      .message + a:focus-visible {
+        border-color: hotpink;
+      }
+`
       document.addEventListener("DOMContentLoaded", () => {
         let interactedWithPageWithin30Seconds = false
         document.addEventListener("click", interactedWithPage)
         document.addEventListener("keydown", interactedWithPage)
 
-        setInterval(() => {
+        setInterval(async () => {
           if (interactedWithPageWithin30Seconds) {
             interactedWithPageWithin30Seconds = false
             fetch("http://localhost:5000/interactedWithPage?boolean=true", {
               credentials: "include",
             })
           } else {
-            fetch("http://localhost:5000/interactedWithPage?boolean=false", {
+            const response = await fetch("http://localhost:5000/interactedWithPage?boolean=false", {
               credentials: "include",
             })
+            const message = await response.json()
+            response != null
+              ? (document.body.innerHTML = `
+              <div class="container">
+                <div class="message">${message.message}</div>
+                <a href="/login">Return to login page</a>
+              </div>
+              <style>
+               ${messageStyle}
+              </style>
+    `)
+              : ""
           }
-        }, 10000)
+        }, 30000)
 
         function interactedWithPage() {
           interactedWithPageWithin30Seconds = true
