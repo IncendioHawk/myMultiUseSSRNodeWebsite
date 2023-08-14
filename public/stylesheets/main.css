@@ -171,9 +171,60 @@ label {
 }
 
 .main {
-  height: 52rem;
-  width: 100rem;
+  height: 55rem;
+  width: 80rem;
   border: 1px solid red;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  place-items: center;
+}
+
+.project {
+  height: 95%;
+  width: 95%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+}
+
+.project a {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+
+.project:nth-child(1) {
+  background-image: url("/images/projects/dice.png");
+}
+
+.project:nth-child(2) {
+  background-image: url("/images/projects/clock.png");
+  background-size: contain;
+}
+
+.project:nth-child(3) {
+  text-align: center;
+  border: 0.5rem solid white;
+  border-radius: 5rem;
+}
+.project:nth-child(3) a {
+  text-decoration: none;
+  color: white;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.maths-wrapper {
+  height: fit-content;
+}
+
+.project:nth-child() {
+  background-image: url("/images/projects/");
+}
+
+.project:nth-child() {
+  background-image: url("/images/projects/");
 }

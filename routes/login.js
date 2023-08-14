@@ -48,8 +48,7 @@ async function authenticateUser(req, res, next) {
 }
 
 async function checkNotLoggedIn(req, res, next) {
-  if ((await databaseEmpty(Session)) || (await databaseEmpty(User)))
-    return next()
+  if ((await databaseEmpty(Session)) || (await databaseEmpty(User))) return next()
   const session = await Session.findOne({ sessionId: req.cookies?._session_ID })
   if (session == null) return next()
   const user = await User.findById(session.user)
