@@ -5,6 +5,8 @@ const signupRouter = require("./routes/signup")
 const loginRouter = require("./routes/login")
 const indexRouter = require("./routes/index")
 const cookieParser = require("cookie-parser")
+const bcrypt = require("bcrypt")
+const User = require("./models/userSchema")
 const Session = require("./models/sessionSchema")
 
 const sessionTimeoutTime = 300000
@@ -19,12 +21,13 @@ app.use("/signup", signupRouter)
 app.use("/login", loginRouter)
 app.use("/", indexRouter)
 
-app.get("/test", (req, res) => {
-  res.render("logout-success", {
-    message: `You have been inactive for ${(sessionTimeoutTime / 60000).toFixed(
-      3
-    )} minutes. Please sign in again to keep using this service.`,
-  })
+app.get("/confirmDelete", (req, res) => {
+  res.render("confirm-delete")
+})
+
+app.post("/delete", authenticateUser, async (req, res) => {
+  await User.findOneAndDelete({ userName: req.body.username })
+  res.render("delete-success")
 })
 
 app.get("/interactedWithPage", async (req, res) => {
@@ -52,13 +55,21 @@ app.listen(process.env.PORT || 5000, () =>
   console.log(`Server listening on port ${process.env.PORT || 5000}`)
 )
 
-// const removeSession = setInterval(async () => {
-//   console.log("sessions", await Session.find())
-//   const sessions = await Session.find()
-//   if (sessions.length <= 0) return
-//   sessions.forEach(async (element) => {
-//     console.log("a", element)
-//     if (element.updatedAt > Date.now() - sessionTimeoutTime) return
-//     console.log(await Session.findByIdAndDelete(element._id))
-//   })
-// }, sessionTimeoutTime)
+async function authenticateUser(req, res, next) {
+  const user = await User.findOne({ userName: req.body.username })
+  if (user == null) {
+    return res.render("confirm-delete", {
+      username: req.body.username,
+      usernameMessage: `User '${req.body.username}' does not exist`,
+      error: true,
+    })
+  }
+  if (!(await bcrypt.compare(req.body.password, user.password))) {
+    return res.render("confirm-delete", {
+      username: req.body.username,
+      passwordMessage: "Password is incorrect",
+      error: true,
+    })
+  }
+  next()
+}

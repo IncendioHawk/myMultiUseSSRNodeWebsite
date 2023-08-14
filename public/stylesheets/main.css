@@ -10,6 +10,7 @@
 :root {
   font-family: monospace;
   height: 100%;
+  user-select: none;
 }
 
 body {
@@ -20,6 +21,7 @@ body {
     hsl(calc(var(--color-base-hue) + 100), 50%, 30%)
   );
   font-size: 2rem;
+  overflow: hidden;
 }
 
 .welcome-message {
@@ -166,4 +168,12 @@ label {
     background-color: blue;
     border: none;
   }
+}
+
+.main {
+  height: 52rem;
+  width: 100rem;
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }

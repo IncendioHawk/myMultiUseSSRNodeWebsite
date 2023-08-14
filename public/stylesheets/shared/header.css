@@ -2,6 +2,7 @@
   background-color: hsl(var(--color-base-hue), 50%, 20%);
   height: 4rem;
   display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -12,4 +13,116 @@
   border-radius: 5rem;
   border: none;
   cursor: pointer;
+}
+
+.hamburger-menu {
+  width: 3rem;
+  height: 2.5rem;
+  position: relative;
+  top: 0.75rem;
+  right: 0.5rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.hamburger-menu > span {
+  border-radius: 0.5rem;
+  position: absolute;
+  height: 0.5rem;
+  width: 3rem;
+  background-color: black;
+  display: inline-block;
+  top: calc((var(--nth-child) - 1) * 1rem);
+  transform-origin: left center;
+  transition: rotate 250ms;
+}
+
+.hamburger-menu > span:nth-child(3) {
+  transition: width 250ms, opacity 300ms;
+}
+
+#hamburger-check {
+  position: fixed;
+  right: -100rem;
+}
+
+.hamburger-menu:has(#hamburger-check:checked) {
+  & span {
+    rotate: var(--angle);
+  }
+  & span:nth-child(3) {
+    width: 0;
+    opacity: 0;
+  }
+}
+
+.navbar-side-container {
+  position: absolute;
+  align-self: normal;
+  right: 0;
+  margin-left: auto;
+  width: 15rem;
+  height: 100vh;
+  background-color: rgb(255, 255, 255, 0);
+  transition: background-color 250ms;
+}
+
+.navbar-side-container:has(#hamburger-check:checked) {
+  background-color: rgb(255, 255, 255, 1);
+}
+
+.navbar-side-container:has(#hamburger-check:checked) .hamburger-menu {
+  right: 15rem;
+}
+
+.navbar-contents {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.delete-btn {
+  padding-block: 0.75rem;
+  padding-inline: 1rem;
+  border-radius: 5rem;
+  border: none;
+  cursor: pointer;
+  background-color: hsl(var(--color-base-hue), 50%, 20%, 0);
+  color: transparent;
+  margin-inline-start: 0.5rem;
+  margin-block-start: 1rem;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.navbar-side-container:has(#hamburger-check:checked) .delete-btn {
+  background-color: hsl(var(--color-base-hue), 50%, 20%, 1);
+  color: white;
+}
+
+.my-links {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  background-color: hsl(var(--color-base-hue), 50%, 90%);
+  border-radius: 5rem;
+  text-align: center;
+  align-items: center;
+  justify-content: flex-start;
+  width: 40rem;
+  height: 4rem;
+
+  & img {
+    height: 3rem;
+    margin-top: 1rem;
+  }
+
+  & img:hover {
+    border: 2px solid hsl(var(--color-base-hue), 50%, 30%);
+  }
 }

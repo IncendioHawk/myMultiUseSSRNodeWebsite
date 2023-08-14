@@ -1,3 +1,19 @@
 :root {
   --color-base-hue: 200;
 }
+
+.hamburger-menu span:nth-child(2) {
+  --nth-child: 1;
+  --angle: 45deg;
+  --number: -1;
+}
+
+.hamburger-menu span:nth-child(3) {
+  --nth-child: 2;
+}
+
+.hamburger-menu span:nth-child(4) {
+  --nth-child: 3;
+  --angle: -45deg;
+  --number: 1;
+}
