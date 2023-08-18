@@ -1,0 +1,264 @@
+@import "variables.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  height: 100%;
+  user-select: none;
+}
+
+body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  background: linear-gradient(
+    to right,
+    hsl(var(--color-base-hue), 50%, 30%),
+    hsl(calc(var(--color-base-hue) + 100), 50%, 30%)
+  );
+}
+
+.dice {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+.face {
+  position: relative;
+  height: 3rem;
+  width: 3rem;
+  border: 0.3rem solid black;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+.face > span {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: black;
+  position: absolute;
+}
+
+/*  */
+/*  */
+/*  */
+
+.one > span:nth-child(1) {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+/*  */
+/*  */
+/*  */
+
+.two > span:nth-child(1) {
+  top: 1.75rem;
+  left: 0.25rem;
+}
+
+.two > span:nth-child(2) {
+  top: 0.25rem;
+  right: 0.25rem;
+}
+
+/*  */
+/*  */
+/*  */
+
+.three > span:nth-child(1) {
+  top: 1.75rem;
+  left: 0.25rem;
+}
+
+.three > span:nth-child(2) {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+.three > span:nth-child(3) {
+  top: 0.25rem;
+  right: 0.25rem;
+}
+
+/*  */
+/*  */
+/*  */
+
+.four > span:nth-child(1) {
+  top: 0.25rem;
+  left: 0.25rem;
+}
+
+.four > span:nth-child(2) {
+  top: 1.75rem;
+  left: 0.25rem;
+}
+
+.four > span:nth-child(3) {
+  top: 0.25rem;
+  right: 0.25rem;
+}
+
+.four > span:nth-child(4) {
+  top: 1.75rem;
+  right: 0.25rem;
+}
+
+/*  */
+/*  */
+/*  */
+
+.five > span:nth-child(1) {
+  top: 0.25rem;
+  left: 0.25rem;
+}
+
+.five > span:nth-child(2) {
+  top: 1.75rem;
+  left: 0.25rem;
+}
+
+.five > span:nth-child(3) {
+  top: 0.25rem;
+  right: 0.25rem;
+}
+
+.five > span:nth-child(4) {
+  top: 1.75rem;
+  right: 0.25rem;
+}
+
+.five > span:nth-child(5) {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+/*  */
+/*  */
+/*  */
+
+.six > span:nth-child(1) {
+  top: 0.25rem;
+  left: 0.25rem;
+}
+
+.six > span:nth-child(2) {
+  top: 1rem;
+  left: 0.25rem;
+}
+
+.six > span:nth-child(3) {
+  top: 1.75rem;
+  left: 0.25rem;
+}
+
+.six > span:nth-child(4) {
+  top: 0.25rem;
+  right: 0.25rem;
+}
+
+.six > span:nth-child(5) {
+  top: 1rem;
+  right: 0.25rem;
+}
+
+.six > span:nth-child(6) {
+  top: 1.75rem;
+  right: 0.25rem;
+}
+
+.dice.rolling > .face {
+  animation: roll-dice 1.5s ease-in-out infinite;
+  animation-delay: calc((var(--face-number) - 1) * 100ms);
+}
+
+.dice-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.roll-dice-btn {
+  cursor: pointer;
+  margin-block: 35rem 2rem;
+  scale: 1.5;
+  width: 5rem;
+  height: 2rem;
+  border: 0.2rem solid hsl(var(--color-base-hue), 50%, 40%);
+  border-radius: 2rem;
+  transition: background-color 400ms ease-in-out, border-color 400ms ease-in-out;
+
+  &:hover {
+    background-color: hsl(var(--color-base-hue), 50%, 40%);
+  }
+
+  &:focus-visible {
+    outline: transparent;
+    background-color: hsl(var(--color-base-hue), 50%, 40%);
+  }
+}
+
+.number-of-sides {
+  text-align: center;
+  margin-block: 0 2rem;
+  scale: 1.5;
+  width: 7rem;
+  height: 2rem;
+  border: 0.15rem solid hsl(var(--color-base-hue), 50%, 40%);
+
+  &:focus-visible {
+    outline: transparent;
+  }
+}
+
+.number-of-dice {
+  text-align: center;
+  margin-block: 0 auto;
+  scale: 1.5;
+  width: 7rem;
+  height: 2rem;
+  border: 0.15rem solid hsl(var(--color-base-hue), 50%, 40%);
+
+  &:focus-visible {
+    outline: transparent;
+  }
+}
+
+.results {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.results-die {
+  transition: opacity 200ms ease-in-out;
+}
+
+@keyframes roll-dice {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

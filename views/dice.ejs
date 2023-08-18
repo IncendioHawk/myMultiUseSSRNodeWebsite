@@ -4,12 +4,51 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/main.css" />
-    <script src="/scripts/dice.js"></script>
+    <link rel="stylesheet" href="/stylesheets/shared/projects.css" />
+    <script defer src="/scripts/dice.js"></script>
     <title>Dice</title>
   </head>
   <body>
-    <div class="dice"></div>
-    <button class="roll-dice"></button>
+    <div class="dice-container">
+      <div class="results"></div>
+      <div class="dice">
+        <div class="face one">
+          <span></span>
+        </div>
+        <div class="face two">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="face three">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="face four">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="face five">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="face six">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <button class="roll-dice-btn">Roll Dice</button>
+      <input placeholder="No. of sides" type="number" class="number-of-sides" />
+      <input placeholder="No. of dice" type="number" class="number-of-dice" />
+    </div>
   </body>
 </html>

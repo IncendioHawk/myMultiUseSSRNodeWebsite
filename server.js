@@ -3,6 +3,7 @@ const express = require("express")
 const app = express()
 const signupRouter = require("./routes/signup")
 const loginRouter = require("./routes/login")
+const projectsRouter = require("./routes/projects")
 const indexRouter = require("./routes/index")
 const cookieParser = require("cookie-parser")
 const bcrypt = require("bcrypt")
@@ -19,6 +20,7 @@ app.set("view engine", "ejs")
 
 app.use("/signup", signupRouter)
 app.use("/login", loginRouter)
+app.use("/projects", projectsRouter)
 app.use("/", indexRouter)
 
 app.get("/confirmDelete", (req, res) => {

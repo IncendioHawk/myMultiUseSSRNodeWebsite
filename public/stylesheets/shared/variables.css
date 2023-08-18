@@ -17,3 +17,27 @@
   --angle: -45deg;
   --number: 1;
 }
+
+.dice > .one {
+  --face-number: 1;
+}
+
+.dice > .two {
+  --face-number: 2;
+}
+
+.dice > .three {
+  --face-number: 3;
+}
+
+.dice > .four {
+  --face-number: 4;
+}
+
+.dice > .five {
+  --face-number: 5;
+}
+
+.dice > .six {
+  --face-number: 6;
+}
