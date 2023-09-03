@@ -20,32 +20,37 @@ const digits = {
 let rolling = false
 
 async function handleClick() {
-  if (numberOfSidesInput.value === "") {
-    alert("Please select a number of sides")
-    return
-  }
-  if (numberOfDiceInput.value === "") {
-    alert("Please select a number of dice")
-    return
-  }
   if (!rolling) {
+    if (numberOfSidesInput.value === "") {
+      alert("Please select a number of sides")
+      return
+    }
+    if (numberOfDiceInput.value === "") {
+      alert("Please select a number of dice")
+      return
+    }
     resultsDiv.innerHTML = ""
     rolling = true
     rollDiceBtn.innerText = "Cancel"
     rollDiceBtn.style.borderColor = "hsl(calc(var(--color-base-hue) + 100), 50%, 40%)"
     dice.classList.add("rolling")
     const numbers = rollDice(numberOfSidesInput.value, numberOfDiceInput.value)
-    numbers.forEach(async (n) => {
+    numbers.forEach(async (n, index) => {
       if (n > 6) {
-        const addends = findAddends(n)
+        const face = document.createElement("div")
+        face.classList.add("face", digits[n], "results-die", "face-over-six")
+        face.innerText = n
+        await sleep(index * 1000)
+        resultsDiv.appendChild(face)
+      } else {
+        const face = document.createElement("div")
+        face.classList.add("face", digits[n], "results-die")
+        for (let i = 1; i <= n; i++) {
+          face.innerHTML += "<span></span>"
+        }
+        await sleep(index * 1000)
+        resultsDiv.appendChild(face)
       }
-      const face = document.createElement("div")
-      face.classList.add("face", digits[n], "results-die")
-      for (let i = 1; i <= n; i++) {
-        face.innerHTML += "<span></span>"
-      }
-      await sleep((n - 1) * 1000)
-      resultsDiv.appendChild(face)
     })
   } else {
     rolling = false
@@ -65,14 +70,6 @@ function rollDice(numberOfSides, numberOfDice) {
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
-function findAddends(number, initialNumber, list = []) {
-  const x1 = Math.trunc(number / 6)
-  const x2 = number - x1
-  list.push(x1)
-  if (number / 6 === 1) return list
-  findAddends(x2, initialNumber, list)
 }
 
 function sumArray(arr) {
