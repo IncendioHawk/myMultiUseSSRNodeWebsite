@@ -23,6 +23,20 @@ body {
   overflow: hidden;
 }
 
+.home {
+  background-color: white;
+  text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+  font-family: Arial;
+  margin-left: 2rem;
+  padding-block: 0.75rem;
+  padding-inline: 1rem;
+  border-radius: 5rem;
+  border: none;
+  cursor: pointer;
+}
+
 .welcome-message {
   margin-left: 2rem;
 }
@@ -174,8 +188,8 @@ label {
   width: 80rem;
   border: 1px solid red;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   place-items: center;
 }
 
@@ -198,7 +212,7 @@ label {
 }
 
 .project:nth-child(2) {
-  background-image: url("/images/projects/clock.png");
+  background-image: url("/images/projects/notebook.png");
   background-size: contain;
 }
 
@@ -214,6 +228,10 @@ label {
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.project:nth-child(4) {
+  background-image: url("/images/projects/emptyTag.png");
 }
 
 .maths-wrapper {

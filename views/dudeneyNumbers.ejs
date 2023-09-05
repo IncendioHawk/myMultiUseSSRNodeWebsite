@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/shared/projects.css" />
+    <script defer src="/scripts/dudeneyNumbers.js"></script>
+    <title>Dudeney Numbers</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll()
+    </script>
+    <link rel="shortcut icon" href="/images/favicons/e^ipi.png" type="image/x-icon" />
+  </head>
+  <body>
+    <%- include('_nav-bar') %>
+    <pre class="dudeney-number-code">
+      <code>
+        const result = []
+        for (let i = 0; i &lt (54 ** 3); i++) {
+          if (Math.cbrt(i) === sumDigits(i)) {
+            result.push(i)
+          }
+        }
+        console.log(result)
+
+
+        function sumDigits(n) {
+          return n.toString().split('').reduce((a, i) => a + Number(i), 0)
+        }
+
+      </code>
+    </pre>
+    <button class="generate-dudeney-numbers">Generate Dudeney Numbers</button>
+    <div class="dudeney-numbers"></div>
+    <a
+      target="_blank"
+      class="dudeney-numbers-explanation-link"
+      href="https://www.geeksforgeeks.org/dudeney-numbers/">
+      What Are Dudeney Numbers?
+    </a>
+  </body>
+</html>

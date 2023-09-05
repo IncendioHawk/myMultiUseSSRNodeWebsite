@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/shared/projects.css" />
+    <script defer src="/scripts/todoList.js"></script>
+    <title>Todo List</title>
+    <link rel="shortcut icon" href="/images/favicons/notebookFavicon.png" type="image/x-icon" />
+  </head>
+  <body>
+    <%- include('_nav-bar') %>
+    <div class="todo-container">
+      <ul class="todos"></ul>
+      <form class="todo-input-form">
+        <div class="user-input">
+          <label class="todo-label" for="todo-input">Todo</label>
+          <input tabindex="1" required id="todo-input" type="text" placeholder class="todo-input" />
+        </div>
+        <button tabindex="2" class="add-todo-btn">Add Todo</button>
+      </form>
+    </div>
+  </body>
+</html>
