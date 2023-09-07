@@ -56,6 +56,9 @@
         border-color: hotpink;
       }
 `
+      const urlBase = `${window.location.protocol}//${window.location.hostname}${
+        window.location.port ? ":" + window.location.port : ""
+      }`
       document.addEventListener("DOMContentLoaded", () => {
         let interactedWithPageWithin30Seconds = false
         document.addEventListener("click", interactedWithPage)
@@ -64,11 +67,11 @@
         setInterval(async () => {
           if (interactedWithPageWithin30Seconds) {
             interactedWithPageWithin30Seconds = false
-            fetch("http://localhost:5000/interactedWithPage?boolean=true", {
+            fetch(`${urlBase}/interactedWithPage?boolean=true`, {
               credentials: "include",
             })
           } else {
-            const response = await fetch("http://localhost:5000/interactedWithPage?boolean=false", {
+            const response = await fetch(`${urlBase}/interactedWithPage?boolean=false`, {
               credentials: "include",
             })
             const message = await response.json()

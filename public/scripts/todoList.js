@@ -3,6 +3,9 @@ const todoInput = document.querySelector(".todo-input")
 const todosList = document.querySelector(".todos")
 const todoLabel = document.querySelector(".todo-label")
 const ids = []
+const urlBase = `${window.location.protocol}//${window.location.hostname}${
+  window.location.port ? ":" + window.location.port : ""
+}`
 
 window.addEventListener("load", loadTodos)
 
@@ -32,6 +35,14 @@ function createTodo(data) {
   })
   todo.appendChild(todoValue)
   todo.appendChild(deleteTodo)
+  fetch(`${urlBase}/projects/todoList?action=create`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ todo: todo.outerHTML, todoId: id }),
+  })
   sessionStorage.setItem(id, todo.outerHTML)
   return todo
 }
@@ -45,6 +56,14 @@ function generateUniqueId(id) {
 function deleteTodoFunction(id) {
   const todo = document.querySelector(`[data-id="${id}"]`)
   todosList.removeChild(todo)
+  fetch(`${urlBase}/projects/todoList?action=delete`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ todoId: id }),
+  })
   sessionStorage.removeItem(id)
 }
 
@@ -52,12 +71,32 @@ async function loadTodos() {
   addTodoBtn.addEventListener("click", addTodo)
   const sessionStorageKeys = Object.keys(sessionStorage)
   if (sessionStorageKeys.length === 0) {
-    await getTodosFromDatabase()
+    const todos = await getTodosFromDatabase()
+    todos.forEach((todo) => {
+      console.log(todo)
+      sessionStorage.setItem(todo.todoId, todo.todoCode)
+      loadTodos()
+    })
+    return
   }
   sessionStorageKeys.forEach((i) => {
     const todo = sessionStorage.getItem(i)
     todosList.innerHTML += todo
+    console.log(todo)
+    console.log(i)
+  })
+  document.querySelectorAll(`[data-id]`).forEach((i) => {
+    i.addEventListener("click", () => {
+      deleteTodoFunction(i.dataset.id)
+    })
   })
 }
 
-async function getTodosFromDatabase() {}
+async function getTodosFromDatabase() {
+  const res = await fetch(`${urlBase}/projects/todoList?action=read`, {
+    method: "POST",
+    credentials: "include",
+  })
+  const todos = await res.json()
+  return todos
+}

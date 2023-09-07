@@ -10,6 +10,7 @@ const Session = require("../models/sessionSchema")
 const validator = require("email-validator")
 const passwordValidator = require("../password-validator")
 const databaseEmpty = require("../databaseEmpty")
+const Todos = require("../models/todoSchema")
 
 router.get("/", checkNotLoggedIn, (req, res) => {
   res.render("signup", { error: false })
@@ -17,11 +18,12 @@ router.get("/", checkNotLoggedIn, (req, res) => {
 
 router.post("/", checkNotLoggedIn, validateInput, async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10)
-  await User.create({
+  const user = await User.create({
     userName: req.body.username,
     email: req.body.email,
     password: hashedPassword,
   })
+  await Todos.create({ todos: [], user: user._id })
   res.redirect("/login")
 })
 
