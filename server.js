@@ -29,7 +29,11 @@ app.get("/confirmDelete", (req, res) => {
 
 app.post("/delete", authenticateUser, async (req, res) => {
   await User.findOneAndDelete({ userName: req.body.username })
+  res.clearCookie("_session_ID")
   res.render("delete-success")
+  const session = await Session.findOne({ sessionId: req.cookies["_session_ID"] })
+  await Session.findOneAndDelete({ sessionId: session.sessionId })
+  if (session == null) return
 })
 
 app.get("/interactedWithPage", async (req, res) => {

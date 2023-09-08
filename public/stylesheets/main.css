@@ -183,10 +183,21 @@ label {
   }
 }
 
+body:has(.project:nth-child(3):hover) .gaussian-integral {
+  opacity: 1;
+}
+
+.gaussian-integral {
+  position: absolute;
+  inset: 17rem 17rem auto auto;
+  border-radius: 2rem;
+  opacity: 0;
+  transition: opacity 400ms ease-in-out;
+}
+
 .main {
   height: 55rem;
   width: 80rem;
-  border: 1px solid red;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;

@@ -75,8 +75,8 @@ async function loadTodos() {
     todos.forEach((todo) => {
       console.log(todo)
       sessionStorage.setItem(todo.todoId, todo.todoCode)
-      loadTodos()
     })
+    loadTodos()
     return
   }
   sessionStorageKeys.forEach((i) => {

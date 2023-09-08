@@ -22,7 +22,7 @@
             value="<%= locals.email %>"
             autocapitalize="none" />
           <% if (locals.error && locals.emailMessage != null) {%>
-          <div class="error-email"><%= locals.emailMessage %></div>
+          <div class="error error-email"><%= locals.emailMessage %></div>
           <% } %>
         </div>
         <div class="username-wrapper user-input">
@@ -37,7 +37,7 @@
             value="<%= locals.username %>"
             autocapitalize="none" />
           <% if (locals.error && locals.usernameMessage != null) {%>
-          <div class="error-email"><%= locals.usernameMessage %></div>
+          <div class="error error-email"><%= locals.usernameMessage %></div>
           <% } %>
         </div>
         <div class="password-wrapper user-input">
@@ -50,7 +50,7 @@
             required
             autocapitalize="none" />
           <% if (locals.error && locals.passwordMessage != null) {%>
-          <div class="error-email"><%= locals.passwordMessage %></div>
+          <div class="error error-email"><%= locals.passwordMessage %></div>
           <% } %>
         </div>
         <div class="confirm-password-wrapper user-input">
@@ -63,7 +63,7 @@
             required
             autocapitalize="none" />
           <% if (locals.error && locals.passwordConfirmMessage != null) {%>
-          <div class="error-email"><%= locals.passwordConfirmMessage %></div>
+          <div class="error error-email"><%= locals.passwordConfirmMessage %></div>
           <% } %>
         </div>
         <input class="submit-btn" type="submit" />
